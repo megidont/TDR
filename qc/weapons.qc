@@ -1242,7 +1242,8 @@ void() ImpulseCommands =
 		ServerflagsCommand ();
 	if (self.impulse == 12)
 		CycleWeaponReverseCommand ();
-
+	if (self.impulse == 15)
+		CCam ();
 	if (self.impulse == 255)
 		QuadCheat ();
 		

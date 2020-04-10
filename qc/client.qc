@@ -508,6 +508,11 @@ void() PutClientInServer =
 	
 	W_SetCurrentAmmo ();
 
+
+	if ( self.aflag )
+		CCamChasePlayer ();
+
+
 	self.attack_finished = time;
 	self.th_pain = player_pain;
 	self.th_die = PlayerDie;
@@ -919,6 +924,9 @@ void() PlayerPreThink =
 
 	if (self.view_ofs == '0 0 0')
 		return;		// intermission or finale
+
+	if ( self.aflag )
+		CCamChasePlayer ();
 
 	makevectors (self.v_angle);		// is this still used
 

@@ -6,6 +6,7 @@ compiling fight.qc
 compiling ai.qc
 compiling combat.qc
 compiling items.qc
+compiling ccam.qc
 compiling weapons.qc
 compiling world.qc
 compiling client.qc
@@ -68,15 +69,15 @@ weapons.qc:677: warning: rand  no references
 weapons.qc:717: warning: rand  no references
 world.qc:362: warning: e  no references
 client.qc:295: warning: pos  no references
-client.qc:704: warning: old_self  no references
-client.qc:739: warning: start  no references
-client.qc:739: warning: end  no references
-client.qc:911: warning: mspeed  no references
-client.qc:911: warning: aspeed  no references
-client.qc:912: warning: r  no references
-client.qc:1123: warning: mspeed  no references
-client.qc:1123: warning: aspeed  no references
-client.qc:1124: warning: r  no references
+client.qc:709: warning: old_self  no references
+client.qc:744: warning: start  no references
+client.qc:744: warning: end  no references
+client.qc:916: warning: mspeed  no references
+client.qc:916: warning: aspeed  no references
+client.qc:917: warning: r  no references
+client.qc:1131: warning: mspeed  no references
+client.qc:1131: warning: aspeed  no references
+client.qc:1132: warning: r  no references
 monsters.qc:51: warning: ent  no references
 monsters.qc:51: warning: otemp  no references
 monsters.qc:51: warning: stemp  no references
@@ -95,14 +96,14 @@ ogre.qc:92: warning: mpuff  no references
 demon.qc:280: warning: vec  no references
 dog.qc:306: warning: vec  no references
 zombie.qc:164: warning: mpuff  no references
- 88568 strofs (of 1000000)
- 20546 numstatements (of 524288)
-  2091 numfunctions (of 16384)
-  4293 numglobaldefs (of 32768)
-   218 numfielddefs (195 unique) (of 2048)
-  4329 numpr_globals (of 65536)
+ 88812 strofs (of 1000000)
+ 20697 numstatements (of 524288)
+  2093 numfunctions (of 16384)
+  4308 numglobaldefs (of 32768)
+   222 numfielddefs (198 unique) (of 2048)
+  4344 numpr_globals (of 65536)
 Writing ../progs.dat
-381804 TOTAL SIZE
+383540 TOTAL SIZE
 Writing ../progs.lno
 225 unique precache_sounds
  95 unique precache_models
@@ -110,11 +111,11 @@ Writing ../progs.lno
 Compile Complete
 
 optres_shortenifnots 116
-optres_overlaptemps 7262
+optres_overlaptemps 7363
 optres_constantarithmatic 20
-optres_nonvec_parms 3904
-optres_assignments 408
-optres_unreferenced 67
+optres_nonvec_parms 3946
+optres_assignments 412
+optres_unreferenced 66
 optres_dupconstdefs 101
 numtemps 117
 62 warnings
