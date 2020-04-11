@@ -80,6 +80,8 @@ void() DecodeLevelParms =
 	if (!deathmatch)
 	{
 		if (world.model == "maps/start.bsp")
+			self.aflag = FALSE;
+			CCam();
 			SetNewParms ();		// take away all stuff on starting new episode
 	}
 
