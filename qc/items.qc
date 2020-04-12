@@ -408,12 +408,12 @@ void() weapon_touch =
 		leave = 1;
 	else
 		leave = 0;
-	
+
 	if (self.classname == "weapon_nailgun")
 	{
 		if (leave && (other.items & IT_NAILGUN) )
 			return;
-		hadammo = other.ammo_nails;			
+		hadammo = other.ammo_nails;
 		new = IT_NAILGUN;
 		other.ammo_nails = other.ammo_nails + 30;
 	}
@@ -460,26 +460,39 @@ void() weapon_touch =
 	else
 		objerror ("weapon_touch: unknown classname");
 
-	sprint (other, "You got the ");
-	sprint (other, self.netname);
-	sprint (other, "\n");
-// weapon touch sound
-	sound (other, CHAN_ITEM, "weapons/pkup.wav", 1, ATTN_NORM);
-	stuffcmd (other, "bf\n");
-
+	if(other.items == other.items | new){
+		sprint (other, "You got a boost");
+		sprint (other, "\n");
+		// weapon touch sound
+		sound (other, CHAN_ITEM, "items/damage.wav", 1, ATTN_NORM);
+		stuffcmd (other, "bf\n");
+		other.ammo_shells = other.ammo_shells + 5;
+		other.ammo_nails = other.ammo_nails + 30;
+		other.ammo_rockets = other.ammo_rockets + 5;
+		other.ammo_cells = other.ammo_cells + 15;
+		other.super_time = 1;
+		other.super_damage_finished = time + 30;
+	}else{
+		sprint (other, "You got the ");
+		sprint (other, self.netname);
+		sprint (other, "\n");
+		// weapon touch sound
+		sound (other, CHAN_ITEM, "weapons/pkup.wav", 1, ATTN_NORM);
+		stuffcmd (other, "bf\n");
+	}
 	bound_other_ammo ();
 
 // change to the weapon
 	old = other.items;
 	other.items = other.items | new;
-	
+
 	stemp = self;
 	self = other;
 
-	if (!deathmatch)
+/*	if (!deathmatch)
 		self.weapon = new;
 	else
-		Deathmatch_Weapon (old, new);
+		Deathmatch_Weapon (old, new);*/		//never did like this feature
 
 	W_SetCurrentAmmo();
 
@@ -1320,7 +1333,13 @@ void() BackpackTouch =
 
 	sprint (other, "\n");
 // backpack touch sound
-	sound (other, CHAN_ITEM, "weapons/lock4.wav", 1, ATTN_NORM);
+	if(self.health >= 25){
+		sound (other, CHAN_ITEM, "items/health1.wav", 1, ATTN_NORM);
+	}else if(self.health){
+		sound (other, CHAN_ITEM, "items/r_item1.wav", 1, ATTN_NORM);
+	}else{
+		sound (other, CHAN_ITEM, "weapons/lock4.wav", 1, ATTN_NORM);
+	}
 	stuffcmd (other, "bf\n");
 
 // remove the backpack, change self to the player
@@ -1453,8 +1472,8 @@ void() DropBackpack =
 
 		if(gib == TRUE){
 			item.velocity_z = 600;
-			item.velocity_x = -100 + (random() * 800);
-			item.velocity_y = -100 + (random() * 800);
+			item.velocity_x = -100 + (random() * 300);
+			item.velocity_y = -100 + (random() * 300);
 		}else{
 			item.velocity_z = 300;
 			item.velocity_x = -100 + (random() * 200);
@@ -1467,6 +1486,11 @@ void() DropBackpack =
 		item.movetype = MOVETYPE_TOSS;
 		setmodel (item, "progs/backpack.mdl");
 		setsize (item, '-16 -16 0', '16 16 56');
+		if(healthpack == TRUE){
+			item.skin = 1;
+		}else{
+			item.skin = 0;
+		}
 		item.touch = BackpackTouch;
 
 		item.nextthink = time + 120;	// remove after 2 minutes

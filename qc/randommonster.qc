@@ -38,7 +38,7 @@ Shalrath
 
 */
 
-void () random_monster_easy = {
+void () monster_randomeasy = {
 
 	local float lotto;
 	local float littleo;

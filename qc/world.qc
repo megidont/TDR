@@ -207,11 +207,15 @@ void() worldspawn =
 	precache_sound ("misc/r_tele3.wav");
 	precache_sound ("misc/r_tele4.wav");
 	precache_sound ("misc/r_tele5.wav");
+	precache_sound ("items/health1.wav");
+	precache_sound ("items/r_item1.wav");
 	precache_sound ("weapons/lock4.wav");		// ammo pick up
 	precache_sound ("weapons/pkup.wav");		// weapon up
 	precache_sound ("items/armor1.wav");		// armor up
 	precache_sound ("weapons/lhit.wav");		//lightning
 	precache_sound ("weapons/lstart.wav");		//lightning start
+	precache_sound ("items/damage.wav");
+	precache_sound ("items/damage2.wav");
 	precache_sound ("items/damage3.wav");
 
 	precache_sound ("misc/power.wav");			//lightning for boss

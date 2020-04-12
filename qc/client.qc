@@ -79,10 +79,11 @@ void() DecodeLevelParms =
 //	if (serverflags)
 	if (!deathmatch)
 	{
-		if (world.model == "maps/start.bsp")
+		if (world.model == "maps/start.bsp"){
 			self.aflag = FALSE;
 			CCam();
 			SetNewParms ();		// take away all stuff on starting new episode
+		}
 	}
 
 	self.items = parm1;
@@ -1077,7 +1078,8 @@ void() CheckPowerups =
 
 		if (self.super_damage_finished < time)
 		{	// just stopped
-			self.items = self.items - IT_QUAD;
+			if(self.items = self.items | IT_QUAD)
+				self.items = self.items - IT_QUAD;
 			self.super_damage_finished = 0;
 			self.super_time = 0;
 		}
