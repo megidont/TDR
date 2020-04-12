@@ -471,7 +471,7 @@ void() weapon_touch =
 		other.ammo_rockets = other.ammo_rockets + 5;
 		other.ammo_cells = other.ammo_cells + 15;
 		other.super_time = 1;
-		other.super_damage_finished = time + 30;
+		other.super_damage_finished = time + 10;
 	}else{
 		sprint (other, "You got the ");
 		sprint (other, self.netname);
@@ -492,7 +492,7 @@ void() weapon_touch =
 	if (!deathmatch)
 		self.weapon = new;
 	else
-		Deathmatch_Weapon (old, new);		//never did like this feature
+		Deathmatch_Weapon (old, new);
 
 	W_SetCurrentAmmo();
 
@@ -1113,7 +1113,7 @@ local float		best;
 			self.nextthink = time + 60;
 		
 		self.think = SUB_regen;
-	}	
+	}
 
 	sound (other, CHAN_VOICE, self.noise, 1, ATTN_NORM);
 	stuffcmd (other, "bf\n");
@@ -1127,13 +1127,13 @@ local float		best;
 		other.rad_time = 1;
 		other.radsuit_finished = time + 30;
 	}
-	
+
 	if (self.classname == "item_artifact_invulnerability")
 	{
 		other.invincible_time = 1;
 		other.invincible_finished = time + 30;
 	}
-	
+
 	if (self.classname == "item_artifact_invisibility")
 	{
 		other.invisible_time = 1;
@@ -1144,7 +1144,7 @@ local float		best;
 	{
 		other.super_time = 1;
 		other.super_damage_finished = time + 30;
-	}	
+	}
 
 	activator = other;
 	SUB_UseTargets();				// fire all targets / killtargets

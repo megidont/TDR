@@ -34,13 +34,13 @@ void () CCamChasePlayer =
 void () CCam =
 {
 	 local entity camera;
-	 local entity spot;
+//	 local entity spot;
 
 	 if (self.aflag == FALSE)
 	 {
 		self.aflag = TRUE;
 		camera = spawn ();
-		spot = spawn ();
+//		spot = spawn ();
 		self.trigger_field = camera;
 		camera.classname = "camera";
 		camera.movetype = MOVETYPE_FLY;
