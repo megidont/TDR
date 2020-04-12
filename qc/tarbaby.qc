@@ -166,6 +166,7 @@ void()	tbaby_jump6	=[	$jump6,tbaby_fly1	] {};
 
 void()	tbaby_die1	=[	$exp,		tbaby_die2	] {
 self.takedamage = DAMAGE_NO;
+DropBackpack();
 };
 void()	tbaby_die2	=[	$exp,		tbaby_run1	] 
 {

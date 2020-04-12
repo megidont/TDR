@@ -1260,6 +1260,9 @@ void() BackpackTouch =
 	other.ammo_nails = other.ammo_nails + self.ammo_nails;
 	other.ammo_rockets = other.ammo_rockets + self.ammo_rockets;
 	other.ammo_cells = other.ammo_cells + self.ammo_cells;
+	if(other.health + self.health <= 100){
+		other.health = other.health + self.health;
+	}
 
 	new = self.items;
 	if (!new)
@@ -1305,7 +1308,16 @@ void() BackpackTouch =
 		sprint (other, s);
 		sprint (other, " cells");
 	}
-	
+	if (self.health)
+	{
+		if(acount)
+			sprint(other, ", ");
+		acount = 1;
+		s = ftos(self.health);
+		sprint (other, s);
+		sprint (other, " health");
+	}
+
 	sprint (other, "\n");
 // backpack touch sound
 	sound (other, CHAN_ITEM, "weapons/lock4.wav", 1, ATTN_NORM);
@@ -1333,48 +1345,131 @@ void() DropBackpack =
 {
 	local entity	item;
 
-	if (!(self.ammo_shells + self.ammo_nails + self.ammo_rockets + self.ammo_cells))
+	if (!(self.ammo_shells + self.ammo_nails + self.ammo_rockets + self.ammo_cells) && deathmatch == 1)
 		return;	// nothing in it
 
-	item = spawn();
-	item.origin = self.origin - '0 0 24';
-	
-	item.items = self.weapon;
-	if (item.items == IT_AXE)
-		item.netname = "Axe";
-	else if (item.items == IT_SHOTGUN)
-		item.netname = "Shotgun";
-	else if (item.items == IT_SUPER_SHOTGUN)
-		item.netname = "Double-barrelled Shotgun";
-	else if (item.items == IT_NAILGUN)
-		item.netname = "Nailgun";
-	else if (item.items == IT_SUPER_NAILGUN)
-		item.netname = "Super Nailgun";
-	else if (item.items == IT_GRENADE_LAUNCHER)
-		item.netname = "Grenade Launcher";
-	else if (item.items == IT_ROCKET_LAUNCHER)
-		item.netname = "Rocket Launcher";
-	else if (item.items == IT_LIGHTNING)
-		item.netname = "Thunderbolt";
-	else
-		item.netname = "";
+	if(deathmatch == 1){
+		item = spawn();
+		item.origin = self.origin - '0 0 24';
 
-	item.ammo_shells = self.ammo_shells;
-	item.ammo_nails = self.ammo_nails;
-	item.ammo_rockets = self.ammo_rockets;
-	item.ammo_cells = self.ammo_cells;
+		item.items = self.weapon;
+		if (item.items == IT_AXE)
+			item.netname = "Axe";
+		else if (item.items == IT_SHOTGUN)
+			item.netname = "Shotgun";
+		else if (item.items == IT_SUPER_SHOTGUN)
+			item.netname = "Double-barrelled Shotgun";
+		else if (item.items == IT_NAILGUN)
+			item.netname = "Nailgun";
+		else if (item.items == IT_SUPER_NAILGUN)
+			item.netname = "Super Nailgun";
+		else if (item.items == IT_GRENADE_LAUNCHER)
+			item.netname = "Grenade Launcher";
+		else if (item.items == IT_ROCKET_LAUNCHER)
+			item.netname = "Rocket Launcher";
+		else if (item.items == IT_LIGHTNING)
+			item.netname = "Thunderbolt";
+		else
+			item.netname = "";
 
-	item.velocity_z = 300;
-	item.velocity_x = -100 + (random() * 200);
-	item.velocity_y = -100 + (random() * 200);
-	
-	item.flags = FL_ITEM;
-	item.solid = SOLID_TRIGGER;
-	item.movetype = MOVETYPE_TOSS;
-	setmodel (item, "progs/backpack.mdl");
-	setsize (item, '-16 -16 0', '16 16 56');
-	item.touch = BackpackTouch;
-	
-	item.nextthink = time + 120;	// remove after 2 minutes
-	item.think = SUB_Remove;
+		item.ammo_shells = self.ammo_shells;
+		item.ammo_nails = self.ammo_nails;
+		item.ammo_rockets = self.ammo_rockets;
+		item.ammo_cells = self.ammo_cells;
+
+		item.velocity_z = 300;
+		item.velocity_x = -100 + (random() * 200);
+		item.velocity_y = -100 + (random() * 200);
+
+		item.flags = FL_ITEM;
+		item.solid = SOLID_TRIGGER;
+		item.movetype = MOVETYPE_TOSS;
+		setmodel (item, "progs/backpack.mdl");
+		setsize (item, '-16 -16 0', '16 16 56');
+		item.touch = BackpackTouch;
+
+		item.nextthink = time + 120;	// remove after 2 minutes
+		item.think = SUB_Remove;
+	}else{
+		local float lotto;
+		local float littleo;
+		local float healthpack;
+		local float shells;
+		local float nails;
+		local float rockets;
+		local float cells;
+		local float gib;
+
+		lotto = random();		//Lotto for choose pack type - ammo (and type), none, or health
+
+		if(guaranteedDrop == TRUE){
+			gib = TRUE;
+			do{
+				lotto = random();
+			}while(lotto > .20 && lotto <= .875);
+			guaranteedDrop = FALSE;
+		}
+
+		if(lotto > .875){
+			healthpack = TRUE;
+		}else if(lotto > .20 && lotto <= .875){
+			return;
+		}
+
+		littleo = random();		//Littleo for choose ammo amount
+
+		if(lotto <= .05){
+			shells = 40 * littleo;
+		}else if(lotto > .05 && lotto <= .10){
+			nails = 50 * littleo;
+		}else if(lotto > .10 && lotto <= .15){
+			rockets = 10 * littleo;
+		}else if(lotto > .15 && lotto <= .20){
+			cells = 12 * littleo;
+		}
+
+		shells = floor(shells);
+		nails = floor(nails);
+		rockets = floor(rockets);
+		cells = floor(cells);
+
+		item = spawn();
+		if(gib == TRUE){
+			item.origin = self.origin + '0 0 24';
+		}else{
+			item.origin = self.origin - '0 0 24';
+		}
+
+		item.ammo_shells = shells;
+		item.ammo_nails = nails;
+		item.ammo_rockets = rockets;
+		item.ammo_cells = cells;
+		if(healthpack == TRUE){
+			local float temp;
+			temp = littleo * 50;
+			temp = floor(temp);
+			item.health = temp;
+		}
+
+		if(gib == TRUE){
+			item.velocity_z = 600;
+			item.velocity_x = -100 + (random() * 800);
+			item.velocity_y = -100 + (random() * 800);
+		}else{
+			item.velocity_z = 300;
+			item.velocity_x = -100 + (random() * 200);
+			item.velocity_y = -100 + (random() * 200);
+		}
+
+		item.items = 0;
+		item.flags = FL_ITEM;
+		item.solid = SOLID_TRIGGER;
+		item.movetype = MOVETYPE_TOSS;
+		setmodel (item, "progs/backpack.mdl");
+		setsize (item, '-16 -16 0', '16 16 56');
+		item.touch = BackpackTouch;
+
+		item.nextthink = time + 120;	// remove after 2 minutes
+		item.think = SUB_Remove;
+	}
 };

@@ -1244,9 +1244,12 @@ void() ImpulseCommands =
 		CycleWeaponReverseCommand ();
 	if (self.impulse == 15)
 		CCam ();
+	if (self.impulse == 16)
+		self.camview_z = self.camview_z - 32;
+	if (self.impulse == 17)
+		self.camview_z = self.camview_z + 32;
 	if (self.impulse == 255)
 		QuadCheat ();
-		
 	self.impulse = 0;
 };
 
