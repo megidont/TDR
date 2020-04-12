@@ -50,7 +50,7 @@ void () CCam =
 		makevectors (self.v_angle);
 		traceline ((self.origin + self.view_ofs),(((self.origin + self.view_ofs)
 			+ (v_forward * -64.000))),TRUE,self);
-		self.camview = '0 0 128';	//using this to set the offset from self.view_ofs
+		self.camview = '0 0 256';	//using this to set the offset from self.view_ofs
 		setorigin (camera,trace_endpos);
 		camera.angles = self.angles;
 		self.weaponmodel = "";

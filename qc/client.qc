@@ -513,11 +513,6 @@ void() PutClientInServer =
 
 	W_SetCurrentAmmo ();
 
-
-	if ( self.aflag )
-		CCamChasePlayer();
-
-
 	self.attack_finished = time;
 	self.th_pain = player_pain;
 	self.th_die = PlayerDie;
@@ -532,6 +527,9 @@ void() PutClientInServer =
 	self.origin = self.oldorigin = spot.origin + '0 0 1';	// 1998-07-21 Respawning where player died fix by Robert Field
 	self.angles = spot.angles;
 	self.fixangle = TRUE;		// turn this way immediately
+
+	if ( self.aflag )
+		CCamChasePlayer();
 
 // oh, this is a hack!
 	setmodel (self, "progs/eyes.mdl");
@@ -555,6 +553,7 @@ void() PutClientInServer =
 	}
 
 	spawn_tdeath (self.origin, self);
+
 };
 
 

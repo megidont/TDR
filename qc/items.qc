@@ -489,10 +489,10 @@ void() weapon_touch =
 	stemp = self;
 	self = other;
 
-/*	if (!deathmatch)
+	if (!deathmatch)
 		self.weapon = new;
 	else
-		Deathmatch_Weapon (old, new);*/		//never did like this feature
+		Deathmatch_Weapon (old, new);		//never did like this feature
 
 	W_SetCurrentAmmo();
 
