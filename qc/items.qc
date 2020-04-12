@@ -1447,10 +1447,10 @@ void() DropBackpack =
 			cells = 12 * littleo;
 		}
 
-		shells = floor(shells);
-		nails = floor(nails);
-		rockets = floor(rockets);
-		cells = floor(cells);
+		shells = ceil(shells);
+		nails = ceil(nails);
+		rockets = ceil(rockets);
+		cells = ceil(cells);
 
 		item = spawn();
 		if(gib == TRUE){
@@ -1466,7 +1466,7 @@ void() DropBackpack =
 		if(healthpack == TRUE){
 			local float temp;
 			temp = littleo * 50;
-			temp = floor(temp);
+			temp = ceil(temp);
 			item.health = temp;
 		}
 
