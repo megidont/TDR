@@ -83,6 +83,8 @@ void() DecodeLevelParms =
 			self.aflag = FALSE;
 			CCam();
 			SetNewParms ();		// take away all stuff on starting new episode
+		}else if(self.aflag == FALSE){
+			CCam();
 		}
 	}
 
@@ -513,7 +515,7 @@ void() PutClientInServer =
 
 
 	if ( self.aflag )
-		CCamChasePlayer ();
+		CCamChasePlayer();
 
 
 	self.attack_finished = time;
@@ -929,7 +931,7 @@ void() PlayerPreThink =
 		return;		// intermission or finale
 
 	if ( self.aflag )
-		CCamChasePlayer ();
+		CCamChasePlayer();
 
 	makevectors (self.v_angle);		// is this still used
 

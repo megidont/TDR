@@ -1243,7 +1243,7 @@ void() ImpulseCommands =
 	if (self.impulse == 12)
 		CycleWeaponReverseCommand ();
 	if (self.impulse == 15)
-		CCam ();
+		CCam();
 	if (self.impulse == 16)
 		self.camview_z = self.camview_z - 32;
 	if (self.impulse == 17)
