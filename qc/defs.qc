@@ -205,8 +205,6 @@ void		end_sys_globals;		// flag for structure dumping
 
 .float		sounds;		// either a cd track number or sound number
 
-.float		pair;
-
 .string		noise, noise1, noise2, noise3;	// contains names of wavs to play
 
 //================================================
@@ -694,5 +692,5 @@ float(entity targ, entity inflictor) CanDamage;
 
 
 .vector camview;
-
+.float pair;
 float guaranteedDrop;
