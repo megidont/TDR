@@ -80,11 +80,14 @@ void() DecodeLevelParms =
 	if (!deathmatch)
 	{
 		if (world.model == "maps/start.bsp"){
+//			CCam();
 			self.aflag = FALSE;
-			CCam();
+			self.shouldCCam = TRUE;
 			SetNewParms ();		// take away all stuff on starting new episode
 		}else if(self.aflag == FALSE){
-			CCam();
+//			CCam();
+			self.aflag = FALSE;
+			self.shouldCCam = TRUE;
 		}
 	}
 
@@ -527,6 +530,12 @@ void() PutClientInServer =
 	self.origin = self.oldorigin = spot.origin + '0 0 1';	// 1998-07-21 Respawning where player died fix by Robert Field
 	self.angles = spot.angles;
 	self.fixangle = TRUE;		// turn this way immediately
+
+	self.v_angle_y = spot.angles_y;				//Fixes view yaw to spawn point yaw for CCam
+
+	if ( self.shouldCCam == TRUE){
+		CCam();
+	}
 
 	if ( self.aflag )
 		CCamChasePlayer();

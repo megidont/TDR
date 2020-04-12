@@ -52,7 +52,6 @@ void () CCam =
 			+ (v_forward * -64.000))),TRUE,self);
 		self.camview = '0 0 256';	//using this to set the offset from self.view_ofs
 		setorigin (camera,trace_endpos);
-		camera.angles = self.angles;
 		self.weaponmodel = "";
 		msg_entity = self;
 		WriteByte (MSG_ONE,5);
@@ -61,6 +60,7 @@ void () CCam =
 		WriteAngle (MSG_ONE,camera.angles_x);
 		WriteAngle (MSG_ONE,camera.angles_y);
 		WriteAngle (MSG_ONE,camera.angles_z);
+		self.shouldCCam = FALSE;
 //		sprint (self,"Chase Cam On\n");
 	}else{
 		self.aflag = FALSE;

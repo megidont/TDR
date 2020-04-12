@@ -694,3 +694,4 @@ float(entity targ, entity inflictor) CanDamage;
 .vector camview;
 .float pair;
 float guaranteedDrop;
+.float shouldCCam;
