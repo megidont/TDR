@@ -37,12 +37,27 @@ Shambler
 Shalrath
 
 */
+float monsterspawndifficulty;
 
-void () monster_randomeasy = {
+void () monster_random = {
 
 	local float lotto;
 	local float littleo;
 	lotto = random();
+	if(monsterspawndifficulty == 1){
+		do{
+			lotto = random();
+		}while(lotto < .5);
+	}else if(monsterspawndifficulty == 2){
+		do{
+			lotto = random();
+		}while(lotto < .75);
+	}else if(monsterspawndifficulty == 3){
+		do{
+			lotto = random();
+		}while(lotto < .95);
+	}
+	monsterspawndifficulty = 0;
 	littleo = random();
 	if(lotto <= .5){
 		if(littleo <= .33){
@@ -89,5 +104,33 @@ void () monster_randomeasy = {
 			monster_shalrath();
 		}
 	}
+
+}
+
+void() monster_randomeasy = {
+
+	monsterspawndifficulty = 0;
+	monster_random();
+
+}
+
+void() monster_randomnormal = {
+
+	monsterspawndifficulty = 1;
+	monster_random();
+
+}
+
+void() monster_randomhard = {
+
+	monsterspawndifficulty = 2;
+	monster_random();
+
+}
+
+void() monster_randomnightmare = {
+
+	monsterspawndifficulty = 3;
+	monster_random();
 
 }
