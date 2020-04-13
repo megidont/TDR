@@ -2,9 +2,12 @@ void() destroyWall;
 
 void() func_destructablewall = {
 
-	precache_model ("progs/gib1.mdl");
-	precache_model ("progs/gib2.mdl");
-	precache_model ("progs/gib3.mdl");
+	precache_model ("maps/wall1.bsp");
+	precache_model ("maps/wall2.bsp");
+	precache_model ("maps/wall3.bsp");
+	precache_model ("maps/wall4.bsp");
+	precache_model ("maps/wall5.bsp");
+	precache_model ("maps/wall6.bsp");
 
 	self.angles = '0 0 0';
         self.movetype = MOVETYPE_PUSH;
@@ -30,9 +33,12 @@ void() destroyWall = {
 	wall = self;
 	self = gibspawner;
 
-	ThrowGib("progs/gib1.mdl", self.health);
-	ThrowGib("progs/gib2.mdl", self.health);
-	ThrowGib("progs/gib3.mdl", self.health);
+	ThrowGib("maps/wall1.bsp", self.health);
+	ThrowGib("maps/wall2.bsp", self.health);
+	ThrowGib("maps/wall3.bsp", self.health);
+	ThrowGib("maps/wall4.bsp", self.health);
+	ThrowGib("maps/wall5.bsp", self.health);
+	ThrowGib("maps/wall6.bsp", self.health);
 
 	self = wall;
 	remove(gibspawner);
