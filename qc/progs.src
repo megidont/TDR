@@ -39,3 +39,4 @@ randommonster.qc
 randomwall.qc
 randomweapon.qc
 destructable.qc
+randomdestructablewall.qc

@@ -5,7 +5,7 @@ void () player_run;
 void(entity bomb, entity attacker, float rad, entity ignore) T_RadiusDamage;
 void(vector org, vector vel, float damage) SpawnBlood;
 void() SuperDamageSound;
-
+void(string name , float dm) ThrowGib;
 
 // called by worldspawn
 void() W_Precache =
@@ -47,11 +47,30 @@ void() W_FireAxe =
 	
 	org = trace_endpos - v_forward*4;
 
-	if (trace_ent.takedamage)
+	if (trace_ent.takedamage && trace_ent.classname != "destructablewall")
 	{
 		trace_ent.axhitme = 1;
 		SpawnBlood (org, '0 0 0', 20);
 		T_Damage (trace_ent, self, self, 20);
+	}else if(trace_ent.takedamage && trace_ent.classname == "destructablewall"){
+		trace_ent.axhitme = 1;
+		local entity gibspawner;
+		local entity oself;
+		gibspawner = spawn();
+		gibspawner.origin = trace_endpos;
+		oself = self;
+		self = gibspawner;
+		ThrowGib("maps/rubble.bsp", self.health);
+		self = oself;
+		remove(gibspawner);
+//		SpawnBlood (org, '0 0 0', 20);
+		T_Damage (trace_ent, self, self, 20);
+		sound (self, CHAN_WEAPON, "player/axhit2.wav", 1, ATTN_NORM);
+		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+		WriteByte (MSG_BROADCAST, TE_GUNSHOT);
+		WriteCoord (MSG_BROADCAST, org_x);
+		WriteCoord (MSG_BROADCAST, org_y);
+		WriteCoord (MSG_BROADCAST, org_z);
 	}
 	else
 	{	// hit wall
@@ -210,9 +229,21 @@ void(float damage, vector dir) TraceAttack =
 
 	org = trace_endpos - dir*4;
 
-	if (trace_ent.takedamage)
+	if (trace_ent.takedamage && trace_ent.classname != "destructablewall")
 	{
 		SpawnBlood (org, vel*0.2, damage);
+		AddMultiDamage (trace_ent, damage);
+	}else if(trace_ent.takedamage && trace_ent.classname == "destructablewall"){
+		local entity gibspawner;
+		local entity oself;
+		gibspawner = spawn();
+		gibspawner.origin = trace_endpos;
+		oself = self;
+		self = gibspawner;
+		ThrowGib("maps/rubble.bsp", self.health);
+		self = oself;
+		remove(gibspawner);
+//		SpawnBlood (org, '0 0 0', 20);
 		AddMultiDamage (trace_ent, damage);
 	}
 	else
@@ -688,15 +719,31 @@ local float rand;
 	}
 	
 // hit something that bleeds
-	if (other.takedamage)
+	if (other.takedamage && other.classname != "destructablewall")
 	{
 		spawn_touchblood (9);
 		T_Damage (other, self, self.owner, 9);
+	}else if(other.takedamage && other.classname == "destructablewall"){
+		local entity gibspawner;
+		local entity oself;
+		gibspawner = spawn();
+		gibspawner.origin = self.origin;
+		oself = self;
+		self = gibspawner;
+		ThrowGib("maps/rubble.bsp", self.health);
+		self = oself;
+		remove(gibspawner);
+		T_Damage (other, self, self.owner, 9);
+		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+		WriteByte (MSG_BROADCAST, TE_SPIKE);
+		WriteCoord (MSG_BROADCAST, self.origin_x);
+		WriteCoord (MSG_BROADCAST, self.origin_y);
+		WriteCoord (MSG_BROADCAST, self.origin_z);
 	}
 	else
 	{
 		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-		
+
 		if (self.classname == "wizspike")
 			WriteByte (MSG_BROADCAST, TE_WIZSPIKE);
 		else if (self.classname == "knightspike")
@@ -728,10 +775,27 @@ local float rand;
 	}
 	
 // hit something that bleeds
-	if (other.takedamage)
+	if (other.takedamage && other.classname != "destructablewall")
 	{
 		spawn_touchblood (18);
 		T_Damage (other, self, self.owner, 18);
+	}else if(other.takedamage && other.classname == "destructablewall"){
+		local entity gibspawner;
+		local entity oself;
+		gibspawner = spawn();
+		gibspawner.origin = self.origin;
+		oself = self;
+		self = gibspawner;
+		ThrowGib("maps/rubble.bsp", self.health);
+		ThrowGib("maps/rubble.bsp", self.health);
+		self = oself;
+		remove(gibspawner);
+		T_Damage (other, self, self.owner, 9);
+		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+		WriteByte (MSG_BROADCAST, TE_SPIKE);
+		WriteCoord (MSG_BROADCAST, self.origin_x);
+		WriteCoord (MSG_BROADCAST, self.origin_y);
+		WriteCoord (MSG_BROADCAST, self.origin_z);
 	}
 	else
 	{

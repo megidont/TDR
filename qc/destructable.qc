@@ -8,7 +8,9 @@ void() func_destructablewall = {
 	precache_model ("maps/wall4.bsp");
 	precache_model ("maps/wall5.bsp");
 	precache_model ("maps/wall6.bsp");
+	precache_model ("maps/rubble.bsp");
 
+	self.classname = "destructablewall";
 	self.angles = '0 0 0';
         self.movetype = MOVETYPE_PUSH;
         self.solid = SOLID_BSP;
