@@ -16,9 +16,12 @@ void () CCamChasePlayer =
 	tempz_x = self.view_ofs_x;
 	tempz_y = self.view_ofs_y;
 	tempz_z = 1;
+	local vector test;
+	test = (((self.origin + self.view_ofs) + (tempz * self.camview_z)) + (tempx * self.camview_x)) + (tempy * self.camview_y);
 	traceline ((self.origin + self.view_ofs),((((self.origin + self.view_ofs)
 		 + (tempz * self.camview_z)) + (tempx * self.camview_x)) + (tempy * self.camview_y)),TRUE,self);
-	setorigin (self.trigger_field,trace_endpos);
+//	setorigin (self.trigger_field,trace_endpos);
+	setorigin (self.trigger_field, test);
 	WriteByte (MSG_ONE,5);
 	WriteEntity (MSG_ONE,self.trigger_field);
 	if(self.v_angle_x != 90){
