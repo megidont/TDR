@@ -2,13 +2,13 @@ void() destroyWall;
 
 void() func_destructablewall = {
 
-	precache_model ("maps/wall1.bsp");
-	precache_model ("maps/wall2.bsp");
-	precache_model ("maps/wall3.bsp");
-	precache_model ("maps/wall4.bsp");
-	precache_model ("maps/wall5.bsp");
-	precache_model ("maps/wall6.bsp");
-	precache_model ("maps/rubble.bsp");
+	precache_model ("progs/wall1.bsp");
+	precache_model ("progs/wall2.bsp");
+	precache_model ("progs/wall3.bsp");
+	precache_model ("progs/wall4.bsp");
+	precache_model ("progs/wall5.bsp");
+	precache_model ("progs/wall6.bsp");
+	precache_model ("progs/rubble.bsp");
 
 	self.classname = "destructablewall";
 	self.angles = '0 0 0';
@@ -35,12 +35,12 @@ void() destroyWall = {
 	wall = self;
 	self = gibspawner;
 
-	ThrowGib("maps/wall1.bsp", self.health);
-	ThrowGib("maps/wall2.bsp", self.health);
-	ThrowGib("maps/wall3.bsp", self.health);
-	ThrowGib("maps/wall4.bsp", self.health);
-	ThrowGib("maps/wall5.bsp", self.health);
-	ThrowGib("maps/wall6.bsp", self.health);
+	ThrowGib("progs/wall1.bsp", self.health);
+	ThrowGib("progs/wall2.bsp", self.health);
+	ThrowGib("progs/wall3.bsp", self.health);
+	ThrowGib("progs/wall4.bsp", self.health);
+	ThrowGib("progs/wall5.bsp", self.health);
+	ThrowGib("progs/wall6.bsp", self.health);
 
 	self = wall;
 	remove(gibspawner);
