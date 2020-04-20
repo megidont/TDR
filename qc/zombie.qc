@@ -391,7 +391,9 @@ void() zombie_die =
 	ThrowGib ("progs/gib1.mdl", self.health);
 	ThrowGib ("progs/gib2.mdl", self.health);
 	ThrowGib ("progs/gib3.mdl", self.health);
-	DropBackpack();
+	if(self.randomBpack == TRUE){
+		DropBackpack();
+	}
 };
 
 /*

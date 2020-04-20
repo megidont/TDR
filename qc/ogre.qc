@@ -392,8 +392,13 @@ void() ogre_die =
 		ThrowGib ("progs/gib3.mdl", self.health);
 		ThrowGib ("progs/gib3.mdl", self.health);
 		ThrowGib ("progs/gib3.mdl", self.health);
-		guaranteedDrop = TRUE;
-		DropBackpack();
+		if(self.randomBpack == TRUE){
+			guaranteedDrop = TRUE;
+			DropBackpack();
+		}else{
+			self.ammo_rockets = 2;
+			DropBackpack();
+		}
 		return;
 	}
 

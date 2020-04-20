@@ -329,7 +329,7 @@ self.velocity_y = -200 + 400*random();
 self.velocity_z = 100 + 100*random();
 self.flags = self.flags - (self.flags & FL_ONGROUND);
 sound (self, CHAN_VOICE, "wizard/wdeath.wav", 1, ATTN_NORM);
-DropBackpack();
+if(self.randomBpack == TRUE){DropBackpack();}
 };
 void()	wiz_death2	=[	$death2,		wiz_death3	] {};
 void()	wiz_death3	=[	$death3,		wiz_death4	]{self.solid = SOLID_NOT;};
@@ -349,8 +349,10 @@ void() wiz_die =
 		ThrowGib ("progs/gib2.mdl", self.health);
 		ThrowGib ("progs/gib2.mdl", self.health);
 		ThrowGib ("progs/gib2.mdl", self.health);
-		guaranteedDrop = TRUE;
-		DropBackpack();
+		if(self.randomBpack == TRUE){
+			guaranteedDrop = TRUE;
+			DropBackpack();
+		}
 		return;
 	}
 

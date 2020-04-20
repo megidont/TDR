@@ -42,6 +42,7 @@ void () CCam =
 	 if (self.aflag == FALSE)
 	 {
 		self.aflag = TRUE;
+		persistentaflag = TRUE;
 		camera = spawn ();
 //		spot = spawn ();
 		self.trigger_field = camera;
@@ -64,9 +65,10 @@ void () CCam =
 		WriteAngle (MSG_ONE,camera.angles_y);
 		WriteAngle (MSG_ONE,camera.angles_z);
 		self.shouldCCam = FALSE;
-//		sprint (self,"Chase Cam On\n");
+		sprint (self,"Top Down Enabled\n");
 	}else{
 		self.aflag = FALSE;
+		persistentaflag = FALSE;
 		msg_entity = self;
 		WriteByte (MSG_ONE,5);
 		WriteEntity (MSG_ONE,self);

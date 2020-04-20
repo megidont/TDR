@@ -205,7 +205,7 @@ void() dog_pain =
 		dog_painb1 ();
 };
 
-void() dog_die1		=[	$death1,	dog_die2	] {DropBackpack();};
+void() dog_die1		=[	$death1,	dog_die2	] {if(self.randomBpack == TRUE){DropBackpack();}};
 void() dog_die2		=[	$death2,	dog_die3	] {};
 void() dog_die3		=[	$death3,	dog_die4	] {};
 void() dog_die4		=[	$death4,	dog_die5	] {};
@@ -215,7 +215,7 @@ void() dog_die7		=[	$death7,	dog_die8	] {};
 void() dog_die8		=[	$death8,	dog_die9	] {};
 void() dog_die9		=[	$death9,	dog_die9	] {};
 
-void() dog_dieb1		=[	$deathb1,	dog_dieb2	] {DropBackpack();};
+void() dog_dieb1		=[	$deathb1,	dog_dieb2	] {if(self.randomBpack == TRUE){DropBackpack();}};
 void() dog_dieb2		=[	$deathb2,	dog_dieb3	] {};
 void() dog_dieb3		=[	$deathb3,	dog_dieb4	] {};
 void() dog_dieb4		=[	$deathb4,	dog_dieb5	] {};
@@ -236,8 +236,10 @@ void() dog_die =
 		ThrowGib ("progs/gib3.mdl", self.health);
 		ThrowGib ("progs/gib3.mdl", self.health);
 		ThrowHead ("progs/h_dog.mdl", self.health);
-		guaranteedDrop = TRUE;
-		DropBackpack();
+		if(self.randomBpack == TRUE){
+			guaranteedDrop = TRUE;
+			DropBackpack();
+		}
 		return;
 	}
 

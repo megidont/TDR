@@ -78,7 +78,7 @@ void() shal_pain3       =[      $pain3, shal_pain4      ] {};
 void() shal_pain4       =[      $pain4, shal_pain5      ] {};
 void() shal_pain5       =[      $pain5, shal_run1      ] {};
 
-void() shal_death1      =[      $death1,        shal_death2     ] {DropBackpack();};
+void() shal_death1      =[      $death1,        shal_death2     ] {if(self.randomBpack == TRUE){DropBackpack();}};
 void() shal_death2      =[      $death2,        shal_death3     ] {};
 void() shal_death3      =[      $death3,        shal_death4     ] {};
 void() shal_death4      =[      $death4,        shal_death5     ] {};
@@ -107,8 +107,10 @@ void() shalrath_die =
 		ThrowGib ("progs/gib1.mdl", self.health);
 		ThrowGib ("progs/gib2.mdl", self.health);
 		ThrowGib ("progs/gib3.mdl", self.health);
-		guaranteedDrop = TRUE;
-		DropBackpack();
+		if(self.randomBpack == TRUE){
+			guaranteedDrop = TRUE;
+			DropBackpack();
+		}
 		return;
 	}
 

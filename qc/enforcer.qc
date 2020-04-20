@@ -295,8 +295,13 @@ void() enf_die =
 		ThrowGib ("progs/gib1.mdl", self.health);
 		ThrowGib ("progs/gib2.mdl", self.health);
 		ThrowGib ("progs/gib3.mdl", self.health);
-		guaranteedDrop = TRUE;
-		DropBackpack();
+		if(self.randomBpack == TRUE){
+			guaranteedDrop = TRUE;
+			DropBackpack();
+		}else{
+			self.ammo_cells = 5;
+			DropBackpack();
+		}
 		return;
 	}
 

@@ -1343,6 +1343,8 @@ void() BackpackTouch =
 	stuffcmd (other, "bf\n");
 
 // remove the backpack, change self to the player
+	dprint(self.classname);
+
 	remove(self);
 	self = other;
 
@@ -1367,9 +1369,11 @@ void() DropBackpack =
 	if (!(self.ammo_shells + self.ammo_nails + self.ammo_rockets + self.ammo_cells) && deathmatch == 1)
 		return;	// nothing in it
 
-	if(deathmatch == 1){
+	if(self.randomBpack != TRUE){
 		item = spawn();
 		item.origin = self.origin - '0 0 24';
+
+		item.classname = self.classname;
 
 		item.items = self.weapon;
 		if (item.items == IT_AXE)
@@ -1417,12 +1421,10 @@ void() DropBackpack =
 		local float nails;
 		local float rockets;
 		local float cells;
-		local float gib;
 
 		lotto = random();		//Lotto for choose pack type - ammo (and type), none, or health
 
 		if(guaranteedDrop == TRUE){
-			gib = TRUE;
 			do{
 				lotto = random();
 			}while(lotto > .20 && lotto <= .875);
@@ -1453,7 +1455,7 @@ void() DropBackpack =
 		cells = ceil(cells);
 
 		item = spawn();
-		if(gib == TRUE){
+		if(guaranteedDrop == TRUE){
 			item.origin = self.origin + '0 0 24';
 		}else{
 			item.origin = self.origin - '0 0 24';
@@ -1470,7 +1472,7 @@ void() DropBackpack =
 			item.health = temp;
 		}
 
-		if(gib == TRUE){
+		if(guaranteedDrop == TRUE){
 			item.velocity_z = 600;
 			item.velocity_x = -100 + (random() * 300);
 			item.velocity_y = -100 + (random() * 300);
