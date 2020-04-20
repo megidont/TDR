@@ -1343,8 +1343,6 @@ void() BackpackTouch =
 	stuffcmd (other, "bf\n");
 
 // remove the backpack, change self to the player
-	dprint(self.classname);
-
 	remove(self);
 	self = other;
 

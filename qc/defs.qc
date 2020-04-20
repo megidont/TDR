@@ -695,5 +695,7 @@ float(entity targ, entity inflictor) CanDamage;
 .float pair;
 float guaranteedDrop;
 .float shouldCCam;
-float persistentaflag
-.float randomBpack
+float persistentaflag;
+.float randomBpack;
+.float monsterlist;
+.float weaponlist;
