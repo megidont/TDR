@@ -1,7 +1,21 @@
-# TDR
+# TDR - Tweaks, Destructables, and Randomness
 
-Well I'm drunk enough to try this again. Top down quake with rogue-like elements.
+As you may be able to guess from the commit history, this repository used to be for a top down roguelike mod of Quake. This wasn't as fun as I wanted it to be, and so I decided to take this repo in a new direction while keeping the same name. Hence, TDR is now Tweaks, Destructables, and Randomness.
 
-Hopefully this time I actually go through with this and can give myself something to play on a psp. Quarantine should help.
+Shout outs to nopy4869 still apply.
 
-Special thanks to nopy4869, my brother and only solace in the ghost town of quake modding
+## Tweaks:
+
+Honestly, the main ones right now have to do with random ammo and health drops. I also made gibbing enemies not exclude them from dropping a backpack.
+TODO: Give individual entities custom death messages if possible.
+
+## Destructables:
+
+Destructable walls have been implemented.
+TODO: Make wall gib take texture of the wall if possible
+TODO: Make wall gib quantities based on volume of wall object
+
+## Randomness:
+
+Random wall objects (regular and destructable), random weapon objects, and random enemy spawns are all implemented.
+TODO: give individual entities their own drop tables (eg. "shambler or vore" "super shotgun or nailgun" "any weapon")
