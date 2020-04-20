@@ -53,19 +53,20 @@ void() monster_random = {
 	local float INCLUDES_TARBABY = 1024;
 	local float INCLUDES_ZOMBIE = 2048;
 
-	if(self.monsterlist == 0){
-		dprint("empty monster list on monster_random at ");
-		dprint(vtos(self.origin));
-		dprint("\n");
-		remove(self);
-	}
-
 	local float lotto;
 	local float spawned;
 
 	lotto = random();
 
 	spawned = FALSE;
+
+	if(self.monsterlist == 0){
+		dprint("empty monster list on monster_random at ");
+		dprint(vtos(self.origin));
+		dprint("\n");
+		remove(self);
+		spawned = TRUE;
+	}
 
 	if(self.monsterlist == INCLUDES_ARMY ){
 		self.classname = "monster_army";
