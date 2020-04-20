@@ -1,7 +1,3 @@
-# TDR
+# TDR - Top Down with Roguelike Elements
 
-Well I'm drunk enough to try this again. Top down quake with rogue-like elements.
-
-Hopefully this time I actually go through with this and can give myself something to play on a psp. Quarantine should help.
-
-Special thanks to nopy4869, my brother and only solace in the ghost town of quake modding
+This branch - Legacy - Represents the final state of the original intent of this project. I intend to abandon my previous intentions, and continue development with some of the features I have added - namely destructable walls and random item and enemy spawns - while disabling top down by default. I will try not to break compatibility with top down, but as it is antithetical to many things that make Quake fun I intend to almost entirely abandon it and take this mod in a different direction.
