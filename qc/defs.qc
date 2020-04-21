@@ -699,3 +699,4 @@ float persistentaflag;
 .float randomBpack;
 .float monsterlist;
 .float weaponlist;
+.string killmessage;

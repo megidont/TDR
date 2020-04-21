@@ -25,11 +25,7 @@ void () weapon_random = {
 	spawned = FALSE;
 
 	if(self.weaponlist == 0){
-		dprint("empty weapon list on weapon_random at ");
-		dprint(vtos(self.origin));
-		dprint("\n");
-		remove(self);
-		spawned = TRUE;
+		self.weaponlist = 63;
 	}
 
 	if(self.weaponlist == INCLUDE_SUPERSHOTGUN){

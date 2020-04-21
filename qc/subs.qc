@@ -4,7 +4,6 @@ void() SUB_Null = {};
 
 void() SUB_Remove = {remove(self);};
 
-
 /*
 QuakeEd only writes a single float for angles (bad idea), so up and down are
 just constant angles.

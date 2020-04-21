@@ -1227,6 +1227,12 @@ void(entity targ, entity attacker) ClientObituary =
 
 	if (targ.classname == "player")
 	{
+		if (attacker.killmessage){
+			bprint(targ.netname);
+			bprint(attacker.killmessage);
+			bprint("\n");
+			return;
+		}
 		if (attacker.classname == "teledeath")
 		{
 			bprint (targ.netname);
